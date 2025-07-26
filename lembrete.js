@@ -53,4 +53,19 @@ function adicionarLembrete() {
   });
 }
 
+function listarLembretes() {
+  if (lembretes.length === 0) {
+    console.log("Não há lembretes para listar.");
+    return exibirMenu();
+  } else
+    lembretes.forEach((lembrete, index) => {
+      console.log(
+        `\nÍndice : ${index + 1}\nNome: ${lembrete.nome}\nPrazo: ${
+          lembrete.prazo
+        }\nConcluído: ${lembrete.isConcluido}\n`
+      );
+    });
+  exibirMenu();
+}
+
 exibirMenu();
