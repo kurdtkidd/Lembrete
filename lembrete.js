@@ -55,7 +55,7 @@ function adicionarLembrete() {
 
 function listagemLembretes() {
   if (lembretes.length === 0) {
-    console.log("Não há lembretes para listar.");
+    console.log("\nNão há lembretes para listar.\n");
     return exibirMenu();
   } else
     lembretes.forEach((lembrete, index) => {
@@ -78,11 +78,7 @@ function editarLembrete() {
   rl.question("Informe o índice do lembrete que deseja editar: ", (indice) => {
     const i = parseInt(indice) - 1;
 
-    if (
-      isNaN(i) ||
-      i < 0 ||
-      i >= lembretes.length
-    ) {
+    if (isNaN(i) || i < 0 || i >= lembretes.length) {
       console.log("Índice inválido.");
       return editarLembrete();
     }
@@ -138,7 +134,27 @@ function editarPrazo(i) {
     lembretes[i].prazo = novoPrazo;
     console.log("\nPrazo alterado com sucesso!\n");
     editarMais(i);
-  }); 
+  });
+}
+
+function marcarConcluido() {
+  listagemLembretes();
+
+  rl.question(
+    "Informe o índice do lembrete que deseja marcar como concluído: ",
+    (indice) => {
+      const i = parseInt(indice) - 1;
+
+      if (isNaN(i) || i < 0 || i >= lembretes.length) {
+        console.log("Índice inválido.");
+        return marcarConcluido();
+      }
+
+      lembretes[i].isConcluido = "Concluído";
+      console.log("\nLembrete marcado como concluído!\n");
+      exibirMenu();
+    }
+  );
 }
 
 exibirMenu();
